@@ -1,0 +1,87 @@
+body {
+  text-align: center;
+  /*adapted from w3 schools https://www.w3schools.com/css/css3_gradients.asp*/
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(45deg,#76e08c,#a2dbca,#76e0d9);
+  /* For Opera 11.1 to 12.0 */
+  background: -o-linear-gradient(45deg,#76e08c,#a2dbca,#76e0d9);
+  /* For Fx 3.6 to 15 */
+  background: -moz-linear-gradient(45deg,#76e08c,#a2dbca,#76e0d9);
+  /* Standard syntax */
+  background: linear-gradient(90deg,#76e08c,#a2dbca,#76e0d9);
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+.article {
+  margin-left: 20%;
+  margin-right: 10%;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 0px;
+}
+
+.article .cover img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.article .cover {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.article .title {
+  background-color: white;
+  text-align: left;
+  display: flex;
+  transform: translateY(-10px);
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.article .title p {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.5em;
+  align-self: flex-end;
+}
+
+.article .like {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  transition: .3s;
+}
+
+.article .dislike {
+  transform: rotateZ(0.5turn);
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  transition: .3s;
+}
+
+.article .button img {
+  width: 80%;
+  padding-top: 15px;
+}
+
+.article .like:hover {
+  cursor: pointer;
+  transform: translateY(-10px);
+}
+
+.article .dislike:hover {
+  cursor: pointer;
+  transform: translateY(10px) rotateZ(-0.5turn);
+}
