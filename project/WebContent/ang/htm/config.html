@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>TaxPro Engine</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="../js/taxconfig.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TaxPro Engine</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="thome.html">Home</a></li>
+		<li><a href="taxlog.html">Tax Log</a></li>
+        <li class="active"><a href="#">Config</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container" ng-controller="GetTaxConfig">
+  <h3>Tax Engine Configuration</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Profile name</th>
+        <th>Address State</th>
+        <th>Tax details</th>
+        <th>Tax Exemption</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "config in configs">
+        <td>{{config.name}}</td>
+        <td>{{config.address.region}}</td>
+        <td>
+        	<table class="table table-condensed" style="margin-bottom:2px">
+        		    <tbody>
+      					<tr ng-repeat = "tax in config.taxDetailList">
+      						<td>{{tax.taxName}}</td>
+      						<td>{{tax.jurisType}}</td>
+      						<td>{{tax.jurisName}}</td>
+      						<td>{{tax.taxNameId}}</td>
+      						<td>{{tax.rate}}</td>
+        				</tr>
+        			</tbody>
+        	</table>
+        </td>
+        <td>{{config.exempt}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>TaxPro Engine Log</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="../js/taxrecs.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TaxPro Engine</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="thome.html">Home</a></li>
+        <li class="active"><a href="taxlog.html">Tax Log</a></li>
+        <li><a href="config.html">Config</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container" ng-controller="GetRecs">
+  <h3>Tax Engine Logs</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>#</th>
+        <th>Tax Request / Response Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "taxrec in taxrecs">
+      	<td>{{(pageCfg.page * pageCfg.count) + $index + 1}}</td>
+        <td>
+            <div class="panel panel-info">
+      			<div class="panel-heading"><span class="label label-primary">{{taxrec.req.method}}</span>&nbsp;{{taxrec.req.address}}</div>
+      			<div class="panel-body">
+        			<div class="well well-sm">
+        				<span>Request Time <span class="bg-info">{{taxrec.req.ts | date:'yyyy-MM-dd HH:mm:ss Z'}}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        				<span>Response Time <span class="bg-info">{{taxrec.resp.ts | date:'yyyy-MM-dd HH:mm:ss Z'}}</span></span>
+        			</div>
+        			<div class="well well-sm"><span>Caller information : {{taxrec.req.remoteInfo}}</span></div>
+		        	<button data-toggle="collapse" data-target="#reqHeaderDiv{{taxrec.req.ts}}" class="btn-info">Show request headers</button>
+					<div id="reqHeaderDiv{{taxrec.req.ts}}" class="collapse">
+						{{taxrec.req.headers}}
+					</div>
+		        	<button data-toggle="collapse" data-target="#reqPayloadDiv{{taxrec.req.ts}}" class="btn-primary">Show request Payload</button>
+					<div id="reqPayloadDiv{{taxrec.req.ts}}" class="collapse">
+						{{taxrec.req.payload}}
+					</div>
+		        	<button data-toggle="collapse" data-target="#respHeaderDiv{{taxrec.req.ts}}" class="btn-info">Show response headers</button>
+					<div id="respHeaderDiv{{taxrec.req.ts}}" class="collapse">
+						{{taxrec.resp.headers}}
+					</div>
+		        	<button data-toggle="collapse" data-target="#respPayloadDiv{{taxrec.req.ts}}" class="btn-primary">Show response Payload <span class="badge">{{taxrec.resp.responseCode}}</span></button>
+					<div id="respPayloadDiv{{taxrec.req.ts}}" class="collapse">
+						{{taxrec.resp.payload}}
+					</div>
+				</div>
+    		</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+	<ul class="pager">
+	  <li class="previous"><button ng-click='previousPage()'>Previous</button></li>
+	  <li class="next"><button ng-click='nextPage()'>Next</button></li>
+	</ul>
+</div>
+
+</body>
+</html>
